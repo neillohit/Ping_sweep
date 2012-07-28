@@ -88,7 +88,8 @@ namespace Ping_sweep
                             p.StartInfo.UseShellExecute = false;
                             p.StartInfo.RedirectStandardOutput = true;
                             p.StartInfo.FileName = "nmap.exe";
-                            p.StartInfo.Arguments = " -oX - --system-dns -sn " + network_range.Text;
+                            if (get_hostname.Checked) { p.StartInfo.Arguments = " -oX - --system-dns -sn " + network_range.Text; }
+                            else { p.StartInfo.Arguments = " -oX - -sn " + network_range.Text; }
                             p.Start();
                             status.Text = "Status: Waiting for nmap to finish....";
                             string output = p.StandardOutput.ReadToEnd();
